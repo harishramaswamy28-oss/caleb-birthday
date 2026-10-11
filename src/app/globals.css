@@ -467,6 +467,10 @@ body {
   line-height: 1.6;
   color: var(--chrome-bright);
   font-weight: 300;
+  /* Original messages contain deliberate line breaks and blank lines —
+     preserve them exactly as written. */
+  white-space: pre-line;
+  overflow-wrap: break-word;
 }
 
 /* ─── Stage 5 — DIGITAL VAULT ──────────────────────────────────────── */
