@@ -314,13 +314,25 @@ export default function WishesSection() {
             {/* Wisher's name — heading above their message + photo. */}
             <h3 className="wish-from">{displayedWish.from}</h3>
             {displayedWish.photoSrc && (
-              <div className="wish-photo-wrap">
+              <div
+                className="wish-photo-wrap"
+                // Wish photos vary in shape — size the box from the real file
+                // dimensions when known so nothing is cropped or letterboxed.
+                style={
+                  displayedWish.photoWidth && displayedWish.photoHeight
+                    ? {
+                        aspectRatio: `${displayedWish.photoWidth} / ${displayedWish.photoHeight}`,
+                      }
+                    : undefined
+                }
+              >
                 <Image
+                  key={`${displayedWish.photoSrc}-${displayedWish.photoWidth}x${displayedWish.photoHeight}`}
                   src={displayedWish.photoSrc}
                   alt={displayedWish.photoAlt ?? ""}
                   fill
-                  sizes="(max-width: 640px) 90vw, 420px"
-                  className="object-cover"
+                  sizes="(max-width: 640px) 90vw, 400px"
+                  className="object-contain"
                 />
               </div>
             )}

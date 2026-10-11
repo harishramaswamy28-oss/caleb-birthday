@@ -391,7 +391,7 @@ export default function VaultSection() {
                             alt={memory.alt}
                             fill
                             sizes="(max-width: 640px) 28vw, 150px"
-                            className="object-cover"
+                            className="object-contain"
                           />
                         </div>
                       </button>
@@ -531,7 +531,7 @@ export default function VaultSection() {
                 alt={openMemory.alt}
                 fill
                 sizes="(max-width: 640px) 90vw, 600px"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             {openMemory.caption && (

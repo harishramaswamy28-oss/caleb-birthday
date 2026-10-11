@@ -6,6 +6,7 @@ import IntroSequence from "@/components/IntroSequence";
 import HeroSection from "@/components/HeroSection";
 import WishesSection from "@/components/WishesSection";
 import VaultSection from "@/components/VaultSection";
+import VideoMemorySection from "@/components/VideoMemorySection";
 
 export default function Home() {
   const [currentStage, setCurrentStage] = useState<"intro" | "hero">("intro");
@@ -23,6 +24,8 @@ export default function Home() {
           <WishesSection />
           {/* STAGE 5 — DIGITAL VAULT: natural scroll continuation from WISHES. */}
           <VaultSection />
+          {/* STAGE 6 — VIDEO MEMORY: birthday video after the vault. */}
+          <VideoMemorySection />
         </>
       )}
     </main>

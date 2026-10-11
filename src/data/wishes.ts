@@ -17,6 +17,10 @@ export interface Wish {
   photoSrc?: string;
   /** Alt text for the matching photo. */
   photoAlt?: string;
+  /** Intrinsic pixel width of the wish photo (for uncropped aspect-ratio sizing). */
+  photoWidth?: number;
+  /** Intrinsic pixel height of the wish photo (for uncropped aspect-ratio sizing). */
+  photoHeight?: number;
 }
 
 export const WISHES: Wish[] = [
@@ -41,6 +45,8 @@ With Love,
 Rebecca Princy Akka.`,
     photoSrc: "/images/Wishes/p1.jpeg",
     photoAlt: "Photo shared by Rebecca Princy Akka for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-b",
@@ -54,6 +60,8 @@ With Love,
 Grazy Akka.`,
     photoSrc: "/images/Wishes/p2.jpeg",
     photoAlt: "Photo shared by Grazy Akka for Caleb's birthday",
+    photoWidth: 869,
+    photoHeight: 1600,
   },
   {
     id: "wish-c",
@@ -64,6 +72,8 @@ One again Happy birthday broo
 Ippadikku Adam :))`,
     photoSrc: "/images/Wishes/p3.jpeg",
     photoAlt: "Photo shared by Adam for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-d",
@@ -78,6 +88,8 @@ With love,
 Alan ❤️✨`,
     photoSrc: "/images/Wishes/p4.jpeg",
     photoAlt: "Photo shared by Alan for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-e",
@@ -91,6 +103,8 @@ Love ya bro ❤️
 -Ethan`,
     photoSrc: "/images/Wishes/p5.jpeg",
     photoAlt: "Photo shared by Ethan for Caleb's birthday",
+    photoWidth: 1600,
+    photoHeight: 1200,
   },
   {
     id: "wish-f",
@@ -106,8 +120,10 @@ I still love and trust you
 Happy birthday Caleb😎😁🩷
 
 -Edna`,
-    photoSrc: "/images/Wishes/p6.jpeg",
+    photoSrc: "/images/Wishes/p6-v2.jpeg",
     photoAlt: "Photo shared by Edna for Caleb's birthday",
+    photoWidth: 400,
+    photoHeight: 300,
   },
   {
     id: "wish-g",
@@ -116,6 +132,8 @@ Happy birthday Caleb😎😁🩷
 -Avantika`,
     photoSrc: "/images/Wishes/p7.jpeg",
     photoAlt: "Photo shared by Avantika for Caleb's birthday",
+    photoWidth: 1220,
+    photoHeight: 1600,
   },
   {
     id: "wish-01",
@@ -123,6 +141,8 @@ Happy birthday Caleb😎😁🩷
     message: `Happy Birthday to my ID card stealer 😂😭❤️🎂 Hope you have the best day ever! Wishing you lots of happiness, success, and all the good things in life. Keep smiling and keep annoying others like you always do 😂🫶🏻 . Stay the same crazy person you are and make lots of beautiful memories this year. Happy Birthday once again! 🥳💗`,
     photoSrc: "/images/Wishes/p8.jpeg",
     photoAlt: "Photo shared by Vijay Nishal for Caleb's birthday",
+    photoWidth: 720,
+    photoHeight: 1280,
   },
   {
     id: "wish-02",
@@ -134,6 +154,8 @@ After all these days of you 'surprising' us on our birthdays, we've tried to sur
 Wishing you sound health, happiness, and lots of success in everything (esp. in your Cybersecurity interests) you do in the years ahead! 🌟`,
     photoSrc: "/images/Wishes/p9.jpeg",
     photoAlt: "Photo shared by Harish Kumar for Caleb's birthday",
+    photoWidth: 738,
+    photoHeight: 1600,
   },
   {
     id: "wish-03",
@@ -141,6 +163,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Happy Birthday Caleb 🗿🎂🎂🥂🫂✨💥🔥I've seen you as a topper boy since high school, and also grinding S grades here in college . Keep grinding and All the best wishes for your life bro 🔥🔥. Happy 19! 🍾`,
     photoSrc: "/images/Wishes/p10.jpeg",
     photoAlt: "Photo shared by Pranesh for Caleb's birthday",
+    photoWidth: 464,
+    photoHeight: 520,
   },
   {
     id: "wish-04",
@@ -148,6 +172,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Happy birthday, future hacker! You're officially the most irritating person I know, right after my brothers. Even though you never pass up a chance to make fun of me, I still don't mind it because I know your intentions are pure underneath it all, and it's just your weird way of treating friends. Keep being the one who brings the good vibes and sets the funny mood in the group. And thanks, because of you, my stickers have reached different continents. I feel popular now.🥲`,
     photoSrc: "/images/Wishes/p11.jpeg",
     photoAlt: "Photo shared by Trishant for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-05",
@@ -155,6 +181,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Happy birthday Caleb, I hope you reach greater heights in your career. Preserve your networking skills as it will take you to greater heights.`,
     photoSrc: "/images/Wishes/p12.jpeg",
     photoAlt: "Photo shared by Roxy for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-06",
@@ -162,6 +190,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Happy birthday da Caleb. Hope you have a great year ahead brother.`,
     photoSrc: "/images/Wishes/p13.jpeg",
     photoAlt: "Photo shared by Archith for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-07",
@@ -169,6 +199,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Happy birthday da caleb. The most hyperactive and naughty guy I've ever met. God may bless you with endless blessings 💖 Stay happy and enthusiastic as you are.`,
     photoSrc: "/images/Wishes/p14.jpg",
     photoAlt: "Photo shared by Prithvi for Caleb's birthday",
+    photoWidth: 346,
+    photoHeight: 193,
   },
   {
     id: "wish-08",
@@ -176,6 +208,8 @@ Wishing you sound health, happiness, and lots of success in everything (esp. in 
     message: `Many more happy returns of the day Caleb🎂🎂🎉🎉!`,
     photoSrc: "/images/Wishes/p15.jpeg",
     photoAlt: "Photo shared by Adhithya A for Caleb's birthday",
+    photoWidth: 1280,
+    photoHeight: 960,
   },
   {
     id: "wish-09",
@@ -200,6 +234,8 @@ May you grow stronger in body, wiser in mind, purer in heart, and deeper in fait
 Poor Racksheetth crying in my dreams.)`,
     photoSrc: "/images/Wishes/p16.jpeg",
     photoAlt: "Photo shared by Shri Vishwa for Caleb's birthday",
+    photoWidth: 738,
+    photoHeight: 1600,
   },
   {
     id: "wish-10",
@@ -207,6 +243,8 @@ Poor Racksheetth crying in my dreams.)`,
     message: `Happy Birthday, Caleb! 🎂❤️ May God bless you with a bright future, endless happiness, good health, and success in everything you do. 🎉✨`,
     photoSrc: "/images/Wishes/p17.jpeg",
     photoAlt: "Photo shared by Mohamed Nawaz for Caleb's birthday",
+    photoWidth: 900,
+    photoHeight: 1600,
   },
   {
     id: "wish-11",
@@ -214,6 +252,8 @@ Poor Racksheetth crying in my dreams.)`,
     message: `Happiest Birthday, Da Elisha! The biggest sticker thief I know, who collects my photos (that too with my worst poses) like it's a full-time job. You're one of the most annoying people ever, but also one of my favourites. I'm genuinely glad to have you in my life, and I hope we stay this close for years to come. Wishing you lots of happiness, success, and everything you deserve. Have a wonderful year ahead.`,
     photoSrc: "/images/Wishes/p18.jpeg",
     photoAlt: "Photo shared by Akshay for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-12",
@@ -223,6 +263,8 @@ I can't believe we are already in our 2nd year of college. Time is flying, but I
 I hope your special day is packed with good vibes, great food, and plenty of celebrations. Here’s to surviving another year of classes together and making even better memories. Have an absolute blast, man! 🎉 Let's celebrate soon!`,
     photoSrc: "/images/Wishes/p19.jpeg",
     photoAlt: "Photo shared by Ishan for Caleb's birthday",
+    photoWidth: 960,
+    photoHeight: 1280,
   },
   {
     id: "wish-13",
@@ -230,6 +272,8 @@ I hope your special day is packed with good vibes, great food, and plenty of cel
     message: `Happy Birthday da Caleb! Wishing you a fantastic birthday filled with happiness, laughter, and unforgettable memories! May GOD open new doors for you and bring you endless opportunities, success, and good health. Have an absolutely wonderful birthday, Caleb! GOD bless!`,
     photoSrc: "/images/Wishes/p20.jpeg",
     photoAlt: "Photo shared by Derek for Caleb's birthday",
+    photoWidth: 1066,
+    photoHeight: 1600,
   },
   {
     id: "wish-14",
@@ -241,6 +285,8 @@ Wishing you a fantastic birthday filled with happiness, laughter, love, and unfo
 Happy Birthday once again, Caleb! ❤️🎂💫`,
     photoSrc: "/images/Wishes/p21.jpeg",
     photoAlt: "Photo shared by Dharsan for Caleb's birthday",
+    photoWidth: 1280,
+    photoHeight: 960,
   },
   {
     id: "wish-15",
@@ -248,6 +294,8 @@ Happy Birthday once again, Caleb! ❤️🎂💫`,
     message: `Yo big Caleb happy birthday 🎂 have a blessed year ahead✨.`,
     photoSrc: "/images/Wishes/p22.jpeg",
     photoAlt: "Photo shared by Kaushik for Caleb's birthday",
+    photoWidth: 653,
+    photoHeight: 809,
   },
   {
     id: "wish-16",
@@ -267,6 +315,8 @@ Indha maari un character ah eppovum maathikaadha da. Un life full ah happiness, 
 Once again Happy Birthday da Caleb! 🎂🥳❤️ Stay the same happy, funny and kind-hearted person forever! 🫂🧸❤️`,
     photoSrc: "/images/Wishes/p23.jpeg",
     photoAlt: "Photo shared by Deepak for Caleb's birthday",
+    photoWidth: 1280,
+    photoHeight: 960,
   },
   {
     id: "wish-17",
@@ -283,6 +333,8 @@ And honestly, you're one of my best Jesus gift to me. 🥹❤️✝️ I'm reall
 May Jesus bless you with a beautiful life filled with love, joy, peace, and purpose. May His grace guide you always, and His unfailing love surround you forever. ❤️✝️`,
     photoSrc: "/images/Wishes/p24.jpeg",
     photoAlt: "Photo shared by Racksheetth for Caleb's birthday",
+    photoWidth: 1050,
+    photoHeight: 1268,
   },
   {
     id: "wish-18",
@@ -290,6 +342,8 @@ May Jesus bless you with a beautiful life filled with love, joy, peace, and purp
     message: `Dear Caleb the monkey 🐒,           you are one of the most precious person I have met ❤️🫶🏻 also sooo annoying 🙄 but it won't change the fact you are my best brother and you are my favourite teddy bear 🧸🎀🫶🏻😁 still so annoying 🙄 n naughty but I am damn sure you will always love me as a tiny baby sister 😁🫶🏻🥹💯 n I wish you the best 19th birthday ever`,
     photoSrc: "/images/Wishes/p25.jpeg",
     photoAlt: "Photo shared by Anina for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-19",
@@ -303,6 +357,8 @@ I genuinely wish you all the happiness, success, and good things in life because
 Happy birthday once again, Caleb!! Have the best dayyy! 🥳✨`,
     photoSrc: "/images/Wishes/p26.jpeg",
     photoAlt: "Photo shared by Kavya for Caleb's birthday",
+    photoWidth: 1599,
+    photoHeight: 1199,
   },
   {
     id: "wish-20",
@@ -318,6 +374,8 @@ May this new chapter bring you lots of happiness, success, good memories, and ob
 Stay the same fun, caring, and effortlessly entertaining person you are. Have an amazing birthday, Calebbb na! Enjoy your day to the fullest! 🥳🎂✨`,
     photoSrc: "/images/Wishes/p27.jpg",
     photoAlt: "Photo shared by Vaishnavi for Caleb's birthday",
+    photoWidth: 351,
+    photoHeight: 496,
   },
   {
     id: "wish-21",
@@ -325,6 +383,8 @@ Stay the same fun, caring, and effortlessly entertaining person you are. Have an
     message: `Sooo happy birthday to the person who blinks his eyes when someone say hi rather than saying a hi back!! Yea obv it's Caleb n this is Navya wishing u a very happy birthday. The jokes made by u, we making jokes on u especially the bus time short meetups are some memories i would always cherish upon. Tbh epdi frnd aaninga edume therile unga kita oru seniornra oru feel eh varadu such a jovial guy u are!! And yeah wishing to always be jolly as always u r n seekrama get a job n get settled so tht we can spend on ur money... Jk but yea hbd once more enjoy ur day.`,
     photoSrc: "/images/Wishes/p28.jpeg",
     photoAlt: "Photo shared by Navya for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-22",
@@ -332,8 +392,10 @@ Stay the same fun, caring, and effortlessly entertaining person you are. Have an
     message: `Happy Birthday, Caleb Bro! May you achieve greater heights in life and also achieve your goals and desires. I pray for you and your family to live a healthy and prosperous life. The first time I came to know about you, you were portrayed like a gangster-like symbol. Maybe it's just because of your naughty behaviour, especially your art of stealing ID cards and cracking into others' mobiles. Gradually, I understood that beside these characteristics lies a pure soul who cares, protects and wishes just good things for others. Even though you annoy everyone, you always respected others, supported them during their tough times and differentiated good and bad for us, which made me wonder about the beauty of life itself, and I really want to thank you for that, bro!
 
 Once again, happy birthday, Caleb Bro!`,
-    photoSrc: "/images/Wishes/p29.jpeg",
+    photoSrc: "/images/Wishes/p29-v2.jpeg",
     photoAlt: "Photo shared by Harish R for Caleb's birthday",
+    photoWidth: 1080,
+    photoHeight: 1338,
   },
   {
     id: "wish-23",
@@ -341,6 +403,8 @@ Once again, happy birthday, Caleb Bro!`,
     message: `Happy Birthday Caleb! 🎉🥳 Wishing you a wonderful birthday and an amazing year ahead! Hope your day is filled with happiness, laughter, and lots of good moments. May this new year of your life bring you success in everything you do, new opportunities, and plenty of reasons to smile. Hope you have a great time today and enjoy every moment of your special day. Stay happy, keep doing your best, and may everything you’re looking forward to work out well. Have a fantastic birthday and an even better year ahead! Once again, wishing you a very happy birthday! 🎂✨`,
     photoSrc: "/images/Wishes/p30.jpeg",
     photoAlt: "Photo shared by Vamshi for Caleb's birthday",
+    photoWidth: 1200,
+    photoHeight: 1600,
   },
   {
     id: "wish-24",
@@ -350,6 +414,8 @@ Once again, happy birthday, Caleb Bro!`,
 Wishing you a fantastic birthday filled with happiness, laughter, love, and unforgettable memories! 🎁✨ I’m really glad to have a friend like you, and I hope this new chapter of your life brings you endless opportunities, success, and all the happiness you deserve. May you achieve every goal you dream of, overcome every challenge with confidence, and keep smiling no matter what life throws your way. 🤍 Keep being the amazing person you are, and never stop chasing your dreams! Enjoy your special day to the fullest, make incredible memories, and have an absolutely legendary year ahead!and one more  thing in the end Once again, Happy Birthday, Caleb! 🎂🔥💯`,
     photoSrc: "/images/Wishes/p31.jpeg",
     photoAlt: "Photo shared by Narasimhan for Caleb's birthday",
+    photoWidth: 175,
+    photoHeight: 230,
   },
   {
     id: "wish-25",
@@ -361,6 +427,8 @@ Hope you have an absolutely amazing day filled with fun, laughter, good vibes, a
 **Once again, Happiest Birthday, Caleb!** 🎂🥳🎉❤️‍🔥 Have a blast! 💥🎈✨`,
     photoSrc: "/images/Wishes/p32.jpeg",
     photoAlt: "Photo shared by Skanthan for Caleb's birthday",
+    photoWidth: 456,
+    photoHeight: 769,
   },
   {
     id: "wish-26",
@@ -370,6 +438,8 @@ Hope you have an absolutely amazing day filled with fun, laughter, good vibes, a
 Wishing you a fantastic birthday filled with happiness, laughter, love, and unforgettable memories! 🫂✨ May this new year of your life bring you endless opportunities, success in everything you do, and the strength to overcome every challenge. 💯🔥 I hope all your dreams come true and that you always have reasons to smile. 😊💫 Keep being the amazing person you are, and never stop chasing your goals. May our friendship continue to grow stronger with more fun, crazy moments, and beautiful memories ahead! 🥂🎁 Enjoy your special day to the fullest, Caleb! ❤️🎉`,
     photoSrc: "/images/Wishes/p33.jpeg",
     photoAlt: "Photo shared by Vishnu for Caleb's birthday",
+    photoWidth: 428,
+    photoHeight: 527,
   },
 
 
@@ -379,6 +449,8 @@ Wishing you a fantastic birthday filled with happiness, laughter, love, and unfo
     message: `Happiest birthday, Caleb Annaaa!! ❤️😭 You’re genuinely the number one rage-baiter I’ve ever met, and honestly, nobody can compete with your talent for annoying vaishu and entertaining me in the best way possible 😂 But You’ve gone from being just a senior to someone I’m genuinely happy to have in my life. I hope this year brings you all the happiness you deserve. Enjoy your special day Annaaaa. You’re definitely one of the best seniors I’ve met♥️`,
     photoSrc: "/images/Wishes/p34.jpeg",
     photoAlt: "Photo shared by Ananya for Caleb's birthday",
+    photoWidth: 960,
+    photoHeight: 1280,
   },
   {
     id: "wish-28",
@@ -393,6 +465,8 @@ Give me some study tips dude!!
 Lastly, your becoming old so get married soon broo!!!!!`,
     photoSrc: "/images/Wishes/p35.jpeg",
     photoAlt: "Photo shared by Varshini for Caleb's birthday",
+    photoWidth: 565,
+    photoHeight: 619,
   },
 
 

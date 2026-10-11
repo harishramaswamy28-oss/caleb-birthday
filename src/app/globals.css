@@ -429,11 +429,20 @@ body {
 .wish-photo-wrap {
   position: relative;
   width: 100%;
+  max-width: 400px;
+  margin: 0 auto 0.4rem;
+  /* Fallback ratio when dimensions are unknown; overridden inline otherwise. */
   aspect-ratio: 4 / 3;
+  max-height: 46vh;
   border-radius: 6px;
   overflow: hidden;
+  background: #101113;
   box-shadow: inset 0 0 0 1px rgba(198, 201, 208, 0.25);
-  margin-bottom: 0.4rem;
+}
+
+/* Full photo, never cropped — the box already matches the photo's shape. */
+.wish-photo-wrap img {
+  object-fit: contain !important;
 }
 
 .wish-from {
@@ -463,14 +472,18 @@ body {
 }
 
 .wish-message {
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
-  line-height: 1.6;
+  /* Birthday message body only — wisher names/headings keep their own styles. */
+  font-family: "Times New Roman", Times, serif;
+  font-size: 12px;
+  line-height: 1.7;
   color: var(--chrome-bright);
-  font-weight: 300;
+  font-weight: 400;
   /* Original messages contain deliberate line breaks and blank lines —
      preserve them exactly as written. */
   white-space: pre-line;
   overflow-wrap: break-word;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* ─── Stage 5 — DIGITAL VAULT ──────────────────────────────────────── */
@@ -792,6 +805,11 @@ body {
     0 6px 14px rgba(0, 0, 0, 0.4);
 }
 
+/* Full vault photo inside the chamber frame — never cropped. */
+.vault-frame-photo img {
+  object-fit: contain !important;
+}
+
 /* ─── Memory viewer modal ──────────────────────────────────────────── */
 
 .vault-viewer-backdrop {
@@ -815,10 +833,16 @@ body {
 .vault-viewer-photo-wrap {
   position: relative;
   width: 100%;
+  max-height: 62vh;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: inset 0 0 0 1px rgba(198, 201, 208, 0.25);
   background: #101113;
+}
+
+/* Full vault photo in the viewer — never cropped. */
+.vault-viewer-photo-wrap img {
+  object-fit: contain !important;
 }
 
 .vault-viewer-caption {
