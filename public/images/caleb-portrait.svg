@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1300" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#22252A"/>
+      <stop offset="50%" stop-color="#18191C"/>
+      <stop offset="100%" stop-color="#101113"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F6F8" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#C6C9D0" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="rimLight" cx="65%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#F5F6F8" stop-opacity="0.2"/>
+      <stop offset="70%" stop-color="#737780" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Deep graphite canvas -->
+  <rect width="1000" height="1300" fill="url(#bgGrad)"/>
+  <rect width="1000" height="1300" fill="url(#sheen)"/>
+
+  <!-- Rim glow behind head -->
+  <circle cx="500" cy="520" r="260" fill="url(#rimLight)"/>
+
+  <!-- Silhouette -->
+  <g fill="#1B1D22" stroke="#35383E" stroke-width="1.5">
+    <path d="M220,1100 Q500,820 780,1100 L840,1300 L160,1300 Z" fill="#15171A" stroke="#2A2D33"/>
+    <rect x="445" y="680" width="110" height="160" rx="20" fill="#18A11D" stroke="none"/>
+    <path d="M360,490 Q360,740 500,770 Q640,740 640,490 Q640,280 500,270 Q360,280 360,490 Z" fill="#1C1e23" stroke="#35383E"/>
+    <path d="M350,440 Q500,240 650,440 Q620,310 500,280 Q380,310 350,440 Z" fill="#121316" stroke="none"/>
+  </g>
+
+  <circle cx="500" cy="520" r="340" fill="none" stroke="#737780" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4,8"/>
+  <circle cx="500" cy="520" r="380" fill="none" stroke="#C6C9D0" stroke-width="1" stroke-opacity="0.1"/>
+
+  <text x="500" y="890" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="700" fill="#F5F6F8" fill-opacity="0.9" text-anchor="middle" letter-spacing="10">CALEB</text>
+  <text x="500" y="935" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#737780" text-anchor="middle" letter-spacing="6">PORTRAIT ARCHIVE // 2026</text>
+  <line x1="420" y1="965" x2="580" y2="965" stroke="#C6C9D0" stroke-width="1" stroke-opacity="0.4"/>
+</svg>

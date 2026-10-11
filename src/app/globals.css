@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+/* ─── Black-Chrome Silver Palette ─────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core chrome surfaces */
+  --chrome-deep:      #101113;   /* deepest graphite */
+  --chrome-soft:      #18191C;   /* soft black surface */
+  --chrome-gunmetal:  #35383E;   /* gunmetal mid-tone */
+  --chrome-steel:     #737780;   /* brushed steel */
+  --chrome-silver:    #C6C9D0;   /* metallic silver */
+  --chrome-bright:    #F5F6F8;   /* bright chrome highlight */
+
+  /* Semantic aliases */
+  --background: var(--chrome-deep);
+  --foreground: var(--chrome-silver);
 }
 
 @theme inline {
@@ -12,15 +22,897 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Force dark chrome always — no light-mode flip */
+body {
+  /* Layered studio darkness — a faint overhead lift over the deep graphite
+     base, so any exposed page background reads as depth, not flat black. */
+  background:
+    radial-gradient(ellipse 140% 50% at 50% -8%, #17181C 0%, transparent 60%),
+    linear-gradient(180deg, #141518 0%, var(--chrome-deep) 45%);
+  color: var(--chrome-silver);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Chrome Light-Sweep Animation ────────────────────────────────── */
+
+/*
+  chrome-sweep: moves a tight specular spike across the gradient.
+  The gradient must be 300% wide so the bright spot only briefly
+  passes over the letters, creating a convincing specular flash.
+*/
+@keyframes chrome-sweep {
+  0%   { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
+
+/* Gentle pulsing opacity for ambient background glow layers */
+@keyframes silver-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Very slow vertical drift for ambient glow blobs */
+@keyframes drift-up {
+  0%   { transform: translateY(0px)   translateX(0px); }
+  33%  { transform: translateY(-22px) translateX(10px); }
+  66%  { transform: translateY(-8px)  translateX(-6px); }
+  100% { transform: translateY(0px)   translateX(0px); }
+}
+
+/* Title scene reveal: scale + fade */
+@keyframes title-enter {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0px); }
+}
+
+/* Horizontal light streak — slides across the title scene */
+@keyframes streak-slide {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.7; }
+  100% { transform: translateX(120%);  opacity: 0; }
+}
+
+/* ─── Chrome Text ──────────────────────────────────────────────────── */
+/*
+  Uses a 300% wide gradient so that the specular spike (the #F5F6F8
+  stop) sweeps across once every 5 seconds, while the resting state
+  reads as mid-silver — not flat grey.
+*/
+/*
+  Rich chrome banding: two bright reflection bands separated by a dark
+  "horizon" band — the classic polished-metal read — while the 300% width
+  keeps the tight specular spike sweeping across every 5 seconds. Palette
+  stays strictly within the black-chrome silver family.
+*/
+.text-chrome {
+  background: linear-gradient(
+    105deg,
+    #383B42  0%,
+    #5E626B  7%,
+    #9CA0A9 16%,
+    #E6E8EC 25%,
+    #F5F6F8 30%,
+    #C6C9D0 38%,
+    #62666F 46%,
+    #474B53 52%,
+    #585C65 58%,
+    #D9DCE1 66%,
+    #F5F6F8 70%,
+    #B6BAC2 78%,
+    #7A7E87 86%,
+    #4E525A 94%,
+    #383B42 100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Soft dark separation so bright stops stay legible over lit backgrounds. */
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.5));
+  animation: chrome-sweep 5s linear infinite;
+}
+
+/* Scroll indicator dot drift — Stage 3 hero */
+@keyframes scroll-dot {
+  0%   { transform: translateY(0px); opacity: 1; }
+  60%  { opacity: 0.4; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+.animate-scroll-dot {
+  animation: scroll-dot 1.8s ease-in-out infinite;
+}
+
+/* ─── Stage 4 — WISHES: envelope collection ───────────────────────── */
+
+.wish-row {
+  /* Subtle silver scrollbar — the collection scrolls vertically, so keep
+     the affordance visible but quiet. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(198, 201, 208, 0.35) transparent;
+}
+.wish-row::-webkit-scrollbar {
+  width: 6px;
+}
+.wish-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+.wish-row::-webkit-scrollbar-thumb {
+  background: rgba(198, 201, 208, 0.3);
+  border-radius: 3px;
+}
+.wish-row:hover::-webkit-scrollbar-thumb {
+  background: rgba(198, 201, 208, 0.5);
+}
+.wish-row--locked {
+  pointer-events: none;
+}
+
+/* Vertical envelope collection: one centered column inside its own scroll
+   container, so any number of wishes added to the data file scrolls here
+   instead of stretching the page. */
+.wish-arc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.4vh, 1.6rem);
+  max-height: min(72vh, 660px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem 1rem 1.5rem;
+}
+
+/* Gentle ambient float — gives the dome a quiet, alive quality without
+   feeling bouncy or playful. Each envelope gets its own phase offset via
+   --float-delay so they never bob in unison. */
+@keyframes wish-float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+
+.wish-item {
+  perspective: 1200px;
+  position: relative;
+  z-index: var(--base-z, 1);
+  transform: translateY(var(--base-y, 0px)) rotate(var(--base-rotate, 0deg))
+    scale(var(--base-scale, 1));
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), z-index 0.1s;
+}
+
+/* Floating wrapper — isolated from the positional transform above so the
+   arc placement and the idle drift never fight each other. */
+.wish-item-float {
+  animation: wish-float 6.5s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* Hover/focus and open state lift the envelope to the foreground without
+   disturbing the rest of the dome's base transform. */
+.wish-item:hover,
+.wish-item:focus-within,
+.wish-item.wish-item--open {
+  z-index: 20;
+}
+
+.wish-envelope {
+  position: relative;
+  width: clamp(108px, 13vw, 176px);
+  height: clamp(76px, 9.4vw, 124px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+  filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+}
+
+.wish-envelope:hover,
+.wish-envelope:focus-visible {
+  transform: translateY(-12px) rotateX(6deg) scale(1.06);
+  filter: drop-shadow(0 22px 30px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+}
+
+.wish-envelope:focus-visible {
+  outline: 2px solid var(--chrome-bright);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+.wish-envelope--locked {
+  opacity: 0.25;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4)) saturate(0.6);
+}
+
+/* Envelope back panel — pearl/silver paper body */
+.wish-envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: linear-gradient(165deg, #F5F6F8 0%, #DEE1E6 45%, #C6C9D0 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 -14px 22px rgba(53, 56, 62, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Restrained silver reflection — a soft diagonal sheen, not a glossy
+   highlight, kept subtle so it reads as cinematic rather than plastic. */
+.wish-envelope-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 18%,
+    rgba(255, 255, 255, 0.05) 27%,
+    rgba(255, 255, 255, 0) 36%,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0) 62%,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(255, 255, 255, 0.045) 78%,
+    rgba(255, 255, 255, 0) 86%
+  );
+  opacity: 0.6;
+  mix-blend-mode: screen;
+}
+
+/* Letter peeking out when opened — slides up from the pocket */
+.wish-letter-peek {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 10%;
+  height: 72%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EDEEF1 100%);
+  box-shadow: inset 0 0 0 1px rgba(198, 201, 208, 0.5);
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Lower pocket triangle, sits above the back panel to frame the flap */
+.wish-envelope-pocket {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72%;
+  z-index: 2;
+  background: linear-gradient(160deg, #E7E9EC 0%, #C6C9D0 55%, #AEB2BA 100%);
+  clip-path: polygon(0% 100%, 50% 32%, 100% 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Top flap — rotates open around the top edge */
+.wish-envelope-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62%;
+  z-index: 3;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  background: linear-gradient(200deg, #F5F6F8 0%, #D4D7DD 60%, #B7BBC3 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -6px 10px rgba(53, 56, 62, 0.1);
+  backface-visibility: hidden;
+}
+
+/* Small gunmetal seal accent at the flap's tip */
+.wish-envelope-seal {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  margin-top: -5px;
+  border-radius: 50%;
+  z-index: 4;
+  background: radial-gradient(circle at 35% 30%, #F5F6F8 0%, #737780 55%, #35383E 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Wisher's name label on the closed envelope front — a small dark metal
+   plate riding the lower pocket, with silver gradient lettering. The
+   max-height + anywhere-wrapping clamp keeps long names from breaking the
+   envelope's fixed dimensions. */
+.wish-envelope-name {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 7%;
+  z-index: 5;
+  padding: 3px 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  max-height: 3.6em;
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: clamp(8px, 1.2vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  pointer-events: none;
+  background: linear-gradient(165deg, #2E3137 0%, #17181C 100%);
+  box-shadow: 0 1px 2px rgba(16, 17, 19, 0.4),
+    0 0 0 1px rgba(198, 201, 208, 0.3),
+    inset 0 1px 0 rgba(245, 246, 248, 0.14);
+}
+.wish-envelope-name > span {
+  /* Elegant metallic silver typography — static gradient so every name
+     stays legible at any scroll/sweep position. */
+  background: linear-gradient(180deg, #F5F6F8 0%, #C6C9D0 55%, #A8ABB4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Stage 4 — WISHES: mobile ────────────────────────────────────────
+   The collection is a vertical scroller at every width; on phones we keep
+   the column centered with comfortable touch spacing and a slightly
+   shorter viewport-relative height so the section stays easy to pass. */
+@media (max-width: 639px) {
+  .wish-arc {
+    gap: 1rem;
+    max-height: min(68vh, 560px);
+    padding: 0.75rem 0.75rem 1.25rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Stage 4 — WISHES: opened letter overlay ─────────────────────── */
+
+.wish-overlay-backdrop {
+  background: rgba(16, 17, 19, 0.82);
+  backdrop-filter: blur(6px);
 }
+
+.wish-letter-card {
+  width: min(92vw, 460px);
+  /* 600px gives the (taller) metallic name heading + photo + a message
+     room to fit without spurious scrollbars; longer messages still scroll. */
+  max-height: min(84vh, 600px);
+  transform: translate(-50%, -50%);
+  background: linear-gradient(165deg, #1E2024 0%, #18191C 100%);
+  border: 1px solid rgba(198, 201, 208, 0.22);
+  border-radius: 10px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(245, 246, 248, 0.08),
+    inset 0 -46px 70px -60px rgba(16, 17, 19, 0.7);
+  overflow-y: auto;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.wish-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(198, 201, 208, 0.35);
+  background: rgba(53, 56, 62, 0.5);
+  color: var(--chrome-silver);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.wish-close-btn:hover {
+  background: rgba(198, 201, 208, 0.18);
+  color: var(--chrome-bright);
+}
+.wish-close-btn:focus-visible {
+  outline: 2px solid var(--chrome-bright);
+  outline-offset: 3px;
+}
+
+.wish-letter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.wish-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(198, 201, 208, 0.25);
+  margin-bottom: 0.4rem;
+}
+
+.wish-from {
+  margin: 0;
+  font-family: monospace;
+  font-size: clamp(1.05rem, 3vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  overflow-wrap: anywhere;
+  /* Elegant metallic silver heading — static gradient so long names stay
+     readable regardless of the letter's scroll position. */
+  background: linear-gradient(180deg, #F5F6F8 0%, #C6C9D0 55%, #A8ABB4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+}
+.wish-from::after {
+  content: "";
+  display: block;
+  width: clamp(46px, 8vw, 72px);
+  height: 1px;
+  margin: 0.75rem auto 0;
+  background: linear-gradient(to right, transparent, rgba(198, 201, 208, 0.65), transparent);
+}
+
+.wish-message {
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--chrome-bright);
+  font-weight: 300;
+}
+
+/* ─── Stage 5 — DIGITAL VAULT ──────────────────────────────────────── */
+
+.vault-door-perspective {
+  position: relative;
+  isolation: isolate;
+  width: clamp(260px, min(72vw, 46vh + 120px), 560px);
+  height: clamp(260px, min(72vw, 46vh + 120px), 560px);
+  margin-bottom: 3.2rem;
+  perspective: 1800px;
+}
+
+/* Stationary vault mouth — same box as the door, sits behind it. */
+.vault-chamber {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50% at 50% 50%);
+  background:
+    radial-gradient(circle at 50% 38%, #2A2C30 0%, #16171A 42%, #0C0D0F 76%);
+  box-shadow:
+    inset 0 0 0 14px rgba(53, 56, 62, 0.92),
+    inset 0 0 0 16px rgba(198, 201, 208, 0.16),
+    inset 0 18px 40px rgba(245, 246, 248, 0.07),
+    inset 0 -28px 48px rgba(0, 0, 0, 0.65),
+    0 0 48px rgba(198, 201, 208, 0.08);
+}
+
+.vault-chamber-glow {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(198, 201, 208, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 90% 35% at 50% 96%, rgba(198, 201, 208, 0.07) 0%, transparent 72%);
+}
+
+/* The whole rotating/opening disc. GSAP drives transform directly —
+   no CSS transition here, so JS-driven tweens never fight a CSS one. */
+.vault-door {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+  transform-origin: 0% 50%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.vault-door--open {
+  pointer-events: none;
+}
+
+.vault-door-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #4A4D55 0%, #2A2C30 38%, #15161A 100%);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.65),
+    inset 0 2px 0 rgba(245, 246, 248, 0.18),
+    inset 0 -18px 40px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 10px rgba(53, 56, 62, 0.9);
+}
+
+.vault-door-ring-outer::before {
+  content: "";
+  position: absolute;
+  inset: 3%;
+  border-radius: 50%;
+  border: 2px solid rgba(198, 201, 208, 0.3);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Restrained studio-light sweeps around the machined outer ring — two
+   soft conic bands, palette-silver only, rotating with the door disc. */
+.vault-door-ring-outer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 205deg,
+    rgba(245, 246, 248, 0) 0deg,
+    rgba(245, 246, 248, 0.09) 40deg,
+    rgba(245, 246, 248, 0) 95deg,
+    rgba(198, 201, 208, 0) 190deg,
+    rgba(198, 201, 208, 0.05) 245deg,
+    rgba(198, 201, 208, 0) 300deg
+  );
+}
+
+.vault-door-ring-mid {
+  position: absolute;
+  inset: 13%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #6B6F77 0%, #35383E 55%, #1A1B1E 100%);
+  box-shadow:
+    inset 0 3px 0 rgba(245, 246, 248, 0.22),
+    inset 0 -10px 26px rgba(0, 0, 0, 0.5),
+    0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.vault-door-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    rgba(245, 246, 248, 0) 30%,
+    rgba(245, 246, 248, 0.16) 45%,
+    rgba(245, 246, 248, 0) 60%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Radial bolts around the inner edge of the door. Position is computed
+   per-bolt in JS (left/top %); only the head's retract motion is
+   GSAP-driven, kept separate so the two transforms never collide. */
+.vault-bolt {
+  position: absolute;
+  width: clamp(10px, 1.6vw, 16px);
+  height: clamp(16px, 2.6vw, 26px);
+  transform: translate(-50%, -50%) rotate(var(--bolt-angle, 0deg));
+}
+
+.vault-bolt-head {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #F5F6F8 0%, #9A9EA8 40%, #4A4D55 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.55);
+}
+
+.vault-wheel-housing {
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #35383E 0%, #1A1B1E 70%);
+  box-shadow: inset 0 0 0 2px rgba(198, 201, 208, 0.18), inset 0 10px 24px rgba(0, 0, 0, 0.6);
+}
+
+.vault-wheel {
+  position: relative;
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: radial-gradient(circle at 38% 32%, #8A8E97 0%, #52555C 45%, #2A2C30 100%);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.6),
+    inset 0 2px 0 rgba(245, 246, 248, 0.3),
+    inset 0 0 0 3px rgba(16, 17, 19, 0.6);
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vault-wheel:hover:not(:disabled),
+.vault-wheel:focus-visible {
+  filter: brightness(1.12);
+}
+
+.vault-wheel:focus-visible {
+  outline: 2px solid var(--chrome-bright);
+  outline-offset: 6px;
+}
+
+.vault-wheel:disabled {
+  cursor: default;
+}
+
+.vault-wheel-spoke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68%;
+  height: 3px;
+  margin-top: -1.5px;
+  margin-left: -34%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(16, 17, 19, 0.55) 20%, rgba(16, 17, 19, 0.75) 50%, rgba(16, 17, 19, 0.55) 80%, transparent 100%);
+}
+
+.vault-wheel-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26%;
+  height: 26%;
+  margin-top: -13%;
+  margin-left: -13%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F5F6F8 0%, #737780 55%, #35383E 100%);
+  box-shadow: inset 0 0 0 2px rgba(16, 17, 19, 0.5), 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.vault-light-spill {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(245, 246, 248, 0.55) 0%, rgba(198, 201, 208, 0.18) 35%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.4);
+  will-change: opacity, transform;
+}
+
+.vault-wheel-caption {
+  position: absolute;
+  left: 50%;
+  bottom: -2.6rem;
+  z-index: 3;
+  transform: translateX(-50%);
+  font-family: monospace;
+  font-size: clamp(9px, 1.1vw, 11px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(198, 201, 208, 0.5);
+  white-space: nowrap;
+}
+
+/* ─── Memory gallery (inside the circular chamber) ─────────────────── */
+
+.vault-gallery-wrapper {
+  position: absolute;
+  inset: 11%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vault-gallery-wrapper--open {
+  pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+  .vault-gallery-wrapper {
+    inset: 14%;
+  }
+}
+
+.vault-frame-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vault-frame-item {
+  position: absolute;
+  left: var(--frame-x, 20%);
+  top: var(--frame-y, 20%);
+  width: var(--frame-w, 32%);
+  transform: rotate(var(--frame-rotate, 0deg));
+  z-index: var(--frame-z, 1);
+}
+
+.vault-frame-item:hover,
+.vault-frame-item:focus-within {
+  z-index: 20;
+}
+
+.vault-frame-entrance {
+  width: 100%;
+}
+
+.vault-frame-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: none;
+  padding: clamp(4px, 1.1vw, 8px);
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(165deg, #4A4D55 0%, #2A2C30 55%, #16171A 100%);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(245, 246, 248, 0.25),
+    inset 0 0 0 1px rgba(198, 201, 208, 0.18);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.vault-frame-btn:hover,
+.vault-frame-btn:focus-visible {
+  transform: scale(1.05);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(245, 246, 248, 0.3),
+    inset 0 0 0 1px rgba(198, 201, 208, 0.3);
+}
+
+.vault-frame-btn:focus-visible {
+  outline: 2px solid var(--chrome-bright);
+  outline-offset: 4px;
+}
+
+.vault-frame-photo {
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #101113;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(198, 201, 208, 0.22),
+    0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Memory viewer modal ──────────────────────────────────────────── */
+
+.vault-viewer-backdrop {
+  background: rgba(16, 17, 19, 0.86);
+  backdrop-filter: blur(6px);
+}
+
+.vault-viewer-card {
+  width: min(92vw, 640px);
+  max-height: min(88vh, 640px);
+  transform: translate(-50%, -50%);
+  background: linear-gradient(165deg, #1E2024 0%, #18191C 100%);
+  border: 1px solid rgba(198, 201, 208, 0.22);
+  border-radius: 10px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(245, 246, 248, 0.08),
+    inset 0 -46px 70px -60px rgba(16, 17, 19, 0.7);
+  overflow-y: auto;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.vault-viewer-photo-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(198, 201, 208, 0.25);
+  background: #101113;
+}
+
+.vault-viewer-caption {
+  margin-top: 0.9rem;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--chrome-bright);
+  font-weight: 300;
+}
+
+.vault-viewer-close,
+.vault-viewer-nav {
+  border-radius: 50%;
+  border: 1px solid rgba(198, 201, 208, 0.35);
+  background: rgba(53, 56, 62, 0.5);
+  color: var(--chrome-silver);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.vault-viewer-close:hover,
+.vault-viewer-nav:hover:not(:disabled) {
+  background: rgba(198, 201, 208, 0.18);
+  color: var(--chrome-bright);
+}
+.vault-viewer-close:focus-visible,
+.vault-viewer-nav:focus-visible {
+  outline: 2px solid var(--chrome-bright);
+  outline-offset: 3px;
+}
+.vault-viewer-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.vault-viewer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.vault-viewer-nav {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+}
+
+/* ─── Finale ───────────────────────────────────────────────────────── */
+
+.vault-finale {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vault-finale-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -20%;
+  width: 35%;
+  background: linear-gradient(to right, transparent 0%, rgba(245, 246, 248, 0.075) 50%, transparent 100%);
+  transform: skewX(-15deg);
+  animation: streak-slide 9s ease-in-out infinite;
+  animation-delay: 2s;
+  pointer-events: none;
+}
+
+/* ─── Reduce-motion overrides ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .text-chrome {
+    animation: none;
+    /* Freeze at mid-silver — still reflective, not flat */
+    background-position: 50% center;
+  }
+  .wish-item,
+  .wish-envelope {
+    transition: none;
+  }
+  .wish-item-float {
+    animation: none;
+  }
+  .vault-frame-btn {
+    transition: none;
+  }
+  .vault-finale-sweep {
+    animation: none;
+    opacity: 0;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
