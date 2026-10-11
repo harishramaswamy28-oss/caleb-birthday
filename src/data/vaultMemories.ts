@@ -1,18 +1,9 @@
 /**
  * STAGE 5 — DIGITAL VAULT: memory gallery content
  * -----------------------------------------------------------------------
- * These are placeholder entries for layout/demo purposes only. The images
- * are the project's existing placeholder art — NOT real photos — and the
- * captions are generic labels, NOT real memories. Do not treat any of
- * this as genuine personal history.
- *
- * To add real memories:
- * 1. Drop real photos into `/public/images/vault/...` (jpg/png/webp).
- * 2. Set `src` to the new path and `width`/`height` to the photo's real
- *    intrinsic pixel dimensions (needed for correct aspect ratio in the
- *    layered gallery — do not force a crop that fights the source photo).
- * 3. Replace `caption` with the real moment being honoured, or omit it
- *    entirely if there's no caption for that memory.
+ * 23 group photos in exact numerical order (1..23), stored at
+ * /public/images/vault/<n>.jpeg. Width/height are the real intrinsic
+ * pixel dimensions of each file (verified on disk).
  */
 
 export interface VaultMemory {
@@ -33,48 +24,163 @@ export interface VaultMemory {
 export const VAULT_MEMORIES: VaultMemory[] = [
   {
     id: "memory-01",
-    src: "/images/vault/memory-1.svg",
-    alt: "Placeholder memory frame 01 — replace with a real photo",
-    width: 800,
-    height: 600,
-    caption: "Sample caption — replace with a real memory.",
+    src: "/images/vault/1.jpeg",
+    alt: "Group photo 1 — Caleb's birthday celebration",
+    width: 1032,
+    height: 774,
   },
   {
     id: "memory-02",
-    src: "/images/vault/memory-2.svg",
-    alt: "Placeholder memory frame 02 — replace with a real photo",
-    width: 600,
-    height: 800,
-    caption: "Sample caption — replace with a real memory.",
+    src: "/images/vault/2.jpeg",
+    alt: "Group photo 2 — Caleb's birthday celebration",
+    width: 1040,
+    height: 780,
   },
   {
     id: "memory-03",
-    src: "/images/vault/memory-3.svg",
-    alt: "Placeholder memory frame 03 — replace with a real photo",
-    width: 800,
-    height: 600,
+    src: "/images/vault/3.jpeg",
+    alt: "Group photo 3 — Caleb's birthday celebration",
+    width: 1280,
+    height: 960,
   },
   {
     id: "memory-04",
-    src: "/images/vault/memory-4.svg",
-    alt: "Placeholder memory frame 04 — replace with a real photo",
-    width: 600,
-    height: 800,
-    caption: "Sample caption — replace with a real memory.",
+    src: "/images/vault/4.jpeg",
+    alt: "Group photo 4 — Caleb's birthday celebration",
+    width: 1280,
+    height: 960,
   },
   {
     id: "memory-05",
-    src: "/images/vault/memory-5.svg",
-    alt: "Placeholder memory frame 05 — replace with a real photo",
-    width: 800,
-    height: 800,
+    src: "/images/vault/5.jpeg",
+    alt: "Group photo 5 — Caleb's birthday celebration",
+    width: 1280,
+    height: 720,
   },
   {
     id: "memory-06",
-    src: "/images/vault/memory-6.svg",
-    alt: "Placeholder memory frame 06 — replace with a real photo",
-    width: 800,
-    height: 600,
-    caption: "Sample caption — replace with a real memory.",
+    src: "/images/vault/6.jpeg",
+    alt: "Group photo 6 — Caleb's birthday celebration",
+    width: 1280,
+    height: 720,
+  },
+  {
+    id: "memory-07",
+    src: "/images/vault/7.jpeg",
+    alt: "Group photo 7 — Caleb's birthday celebration",
+    width: 1152,
+    height: 648,
+  },
+  {
+    id: "memory-08",
+    src: "/images/vault/8.jpeg",
+    alt: "Group photo 8 — Caleb's birthday celebration",
+    width: 1280,
+    height: 720,
+  },
+  {
+    id: "memory-09",
+    src: "/images/vault/9.jpeg",
+    alt: "Group photo 9 — Caleb's birthday celebration",
+    width: 1152,
+    height: 864,
+  },
+  {
+    id: "memory-10",
+    src: "/images/vault/10.jpeg",
+    alt: "Group photo 10 — Caleb's birthday celebration",
+    width: 1024,
+    height: 768,
+  },
+  {
+    id: "memory-11",
+    src: "/images/vault/11.jpeg",
+    alt: "Group photo 11 — Caleb's birthday celebration",
+    width: 1024,
+    height: 768,
+  },
+  {
+    id: "memory-12",
+    src: "/images/vault/12.jpeg",
+    alt: "Group photo 12 — Caleb's birthday celebration",
+    width: 1024,
+    height: 768,
+  },
+  {
+    id: "memory-13",
+    src: "/images/vault/13.jpeg",
+    alt: "Group photo 13 — Caleb's birthday celebration",
+    width: 1032,
+    height: 581,
+  },
+  {
+    id: "memory-14",
+    src: "/images/vault/14.jpeg",
+    alt: "Group photo 14 — Caleb's birthday celebration",
+    width: 706,
+    height: 538,
+  },
+  {
+    id: "memory-15",
+    src: "/images/vault/15.jpeg",
+    alt: "Group photo 15 — Caleb's birthday celebration",
+    width: 720,
+    height: 534,
+  },
+  {
+    id: "memory-16",
+    src: "/images/vault/16.jpeg",
+    alt: "Group photo 16 — Caleb's birthday celebration",
+    width: 1599,
+    height: 1410,
+  },
+  {
+    id: "memory-17",
+    src: "/images/vault/17.jpeg",
+    alt: "Group photo 17 — Caleb's birthday celebration",
+    width: 1280,
+    height: 720,
+  },
+  {
+    id: "memory-18",
+    src: "/images/vault/18.jpeg",
+    alt: "Group photo 18 — Caleb's birthday celebration",
+    width: 1280,
+    height: 960,
+  },
+  {
+    id: "memory-19",
+    src: "/images/vault/19.jpeg",
+    alt: "Group photo 19 — Caleb's birthday celebration",
+    width: 1280,
+    height: 959,
+  },
+  {
+    id: "memory-20",
+    src: "/images/vault/20.jpeg",
+    alt: "Group photo 20 — Caleb's birthday celebration",
+    width: 1600,
+    height: 1200,
+  },
+  {
+    id: "memory-21",
+    src: "/images/vault/21.jpeg",
+    alt: "Group photo 21 — Caleb's birthday celebration",
+    width: 1600,
+    height: 1200,
+  },
+  {
+    id: "memory-22",
+    src: "/images/vault/22.jpeg",
+    alt: "Group photo 22 — Caleb's birthday celebration",
+    width: 1600,
+    height: 1200,
+  },
+  {
+    id: "memory-23",
+    src: "/images/vault/23.jpeg",
+    alt: "Group photo 23 — Caleb's birthday celebration",
+    width: 1600,
+    height: 1200,
   },
 ];

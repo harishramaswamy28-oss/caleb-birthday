@@ -348,17 +348,24 @@ export default function VaultSection() {
             <ul className="vault-frame-list">
               {VAULT_MEMORIES.map((memory, i) => {
                 const layer = LAYER_LAYOUT[i % LAYER_LAYOUT.length];
+                // 23 photos share 6 collage slots: fan out repeats with a small
+                // deterministic offset so stacked frames stay clickable instead
+                // of sitting pixel-exact on top of each other. Later repeats
+                // sit slightly higher in z-order within their own slot.
+                const cycle = Math.floor(i / LAYER_LAYOUT.length);
+                const jitterX = cycle === 0 ? 0 : ((i * 7) % 5) - 2;
+                const jitterY = cycle === 0 ? 0 : ((i * 11) % 5) - 2;
                 return (
                   <li
                     key={memory.id}
                     className="vault-frame-item"
                     style={
                       {
-                        "--frame-x": `${layer.x}%`,
-                        "--frame-y": `${layer.y}%`,
+                        "--frame-x": `${layer.x + jitterX}%`,
+                        "--frame-y": `${layer.y + jitterY}%`,
                         "--frame-w": `${layer.w}%`,
                         "--frame-rotate": `${layer.rotate}deg`,
-                        "--frame-z": layer.z,
+                        "--frame-z": layer.z + cycle,
                       } as React.CSSProperties
                     }
                   >
