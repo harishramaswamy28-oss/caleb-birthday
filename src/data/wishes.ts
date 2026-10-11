@@ -373,7 +373,27 @@ Wishing you a fantastic birthday filled with happiness, laughter, love, and unfo
   },
 
 
-
+  {
+    id: "wish-27",
+    from: "Ananya",
+    message: `Happiest birthday, Caleb Annaaa!! ❤️😭 You’re genuinely the number one rage-baiter I’ve ever met, and honestly, nobody can compete with your talent for annoying vaishu and entertaining me in the best way possible 😂 But You’ve gone from being just a senior to someone I’m genuinely happy to have in my life. I hope this year brings you all the happiness you deserve. Enjoy your special day Annaaaa. You’re definitely one of the best seniors I’ve met♥️`,
+    photoSrc: "/images/Wishes/p34.jpeg",
+    photoAlt: "Photo shared by Ananya for Caleb's birthday",
+  },
+  {
+    id: "wish-28",
+    from: "Varshini",
+    message: `Happieee Birthdayyy to the one who is born to annoy me for the rest of my life😭🤍
+Have a blessed year ahead!!! 
+Forever grateful for a friend like you who ragebaits me to the core and at the same time helps me whenever needed....
+May God use you more for His glory!!
+I've always admired the way you worship God and serve God. Keep doing it👍🏻
+I'm quite jealous (actually not) about your academic performance..... like you're the real topper... 
+Give me some study tips dude!! 
+Lastly, your becoming old so get married soon broo!!!!!`,
+    photoSrc: "/images/Wishes/p35.jpeg",
+    photoAlt: "Photo shared by Varshini for Caleb's birthday",
+  },
 
 
 
